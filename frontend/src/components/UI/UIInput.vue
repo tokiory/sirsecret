@@ -11,7 +11,7 @@
     />
     <slot name="after" :clear="clear" />
     <div
-      v-if="$slots.placeholder"
+      v-if="$slots.placeholder && isEmpty"
       class="input-wrapper__placeholder"
       @click="onWrapperClick"
     >
@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { shallowRef, toRefs } from "vue";
+import { computed, shallowRef, toRefs } from "vue";
 
 interface InputProps {
   type?: "text" | "number";
@@ -39,6 +39,14 @@ const inputRef = shallowRef<HTMLInputElement | null>(null);
 const { type, disabled, placeholder } = toRefs(props);
 const inputValue = defineModel<string>();
 
+const isEmpty = computed(() => {
+  return !inputValue.value?.length;
+});
+
+const focus = () => {
+  inputRef.value?.focus();
+};
+
 const clear = () => {
   inputValue.value = "";
   inputRef.value?.focus();
@@ -47,6 +55,11 @@ const clear = () => {
 const onWrapperClick = () => {
   inputRef.value?.focus();
 };
+
+defineExpose({
+  clear,
+  focus,
+});
 </script>
 
 <style lang="scss" scoped>
@@ -55,6 +68,7 @@ $color-border: hsl(var(--color-foreground) / 0.1);
 $color-border-focus: hsl(var(--color-foreground) / 0.15);
 
 .input-wrapper {
+  font-size: 15px;
   position: relative;
   display: flex;
   align-items: center;
@@ -74,6 +88,7 @@ $color-border-focus: hsl(var(--color-foreground) / 0.15);
     all: unset;
     width: 100%;
     height: 100%;
+    line-height: 1.6;
 
     &::placeholder,
     &:disabled {

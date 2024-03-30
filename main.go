@@ -3,10 +3,10 @@ package main
 import (
 	"embed"
 
-    "github.com/wailsapp/wails/v2/pkg/options/mac"
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
 	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
+	"github.com/wailsapp/wails/v2/pkg/options/mac"
 	"github.com/wailsapp/wails/v2/pkg/options/windows"
 )
 
@@ -23,27 +23,27 @@ func main() {
 		Title:  title,
 		Width:  1024,
 		Height: 768,
-		Windows: &windows.Options {
-            WindowIsTranslucent:               true,
-            WebviewIsTransparent:              true,
+		Windows: &windows.Options{
+			WindowIsTranslucent:  true,
+			WebviewIsTransparent: true,
 		},
 		Mac: &mac.Options{
-            TitleBar: &mac.TitleBar{
-                TitlebarAppearsTransparent: false,
-                HideTitle:                  false,
-                HideTitleBar:               false,
-                FullSizeContent:            false,
-                UseToolbar:                 false,
-                HideToolbarSeparator:       true,
-            },
-            Appearance:           mac.NSAppearanceNameDarkAqua,
-            WebviewIsTransparent: true,
-            WindowIsTranslucent:  true,
-            About: &mac.AboutInfo{
-                Title:   title,
-                Message: "© 2021 Me",
-            },
-        },
+			TitleBar: &mac.TitleBar{
+				TitlebarAppearsTransparent: false,
+				HideTitle:                  false,
+				HideTitleBar:               false,
+				FullSizeContent:            false,
+				UseToolbar:                 false,
+				HideToolbarSeparator:       true,
+			},
+			Appearance:           mac.NSAppearanceNameDarkAqua,
+			WebviewIsTransparent: true,
+			WindowIsTranslucent:  true,
+			About: &mac.AboutInfo{
+				Title:   title,
+				Message: "© 2021 Me",
+			},
+		},
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},

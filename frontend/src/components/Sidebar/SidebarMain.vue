@@ -10,7 +10,7 @@ import { SidebarNavigation } from "@/components/Sidebar";
 
 <style lang="scss" scoped>
 .sidebar {
-  width: 270px;
+  width: 240px;
   height: fit-content;
 }
 </style>
